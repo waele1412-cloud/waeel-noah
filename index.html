@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع نواة | صناعة القادة الشباب</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        // تم ضبط الألوان لتناسب الشعار الجديد بدقة
+                        primary: '#239F56', // الأخضر الزاهي من الشعار الجديد
+                        secondary: '#E8B936', // الأصفر/الذهبي من الشعار
+                        darkGreen: '#145D32',
+                        light: '#F2F9F4',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(35, 159, 86, 0.9), rgba(20, 93, 50, 0.85)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #239F56;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #145D32;
+        }
+        
+        /* AI Loading Animation */
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #E8B936;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+            margin: 0 2px;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Logo: تصميم الشعار العرضي برمجياً -->
+                <div class="bg-white px-3 py-1 rounded-xl shadow-md flex items-center justify-center border-b-4 border-secondary transition-transform transform group-hover:scale-105 h-auto min-h-[64px]">
+                    <div class="flex items-center gap-3 dir-rtl">
+                        <!-- الجزء الأيمن: الأيقونة + إشراق -->
+                        <div class="flex flex-col items-center justify-center pt-1">
+                            <!-- SVG Icon -->
+                            <svg width="40" height="25" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- القبة الخضراء -->
+                                <path d="M70 130 C70 100 130 100 130 130 Z" fill="#239F56"/>
+                                <!-- الأشخاص الذهبية -->
+                                <circle cx="45" cy="75" r="14" fill="#E8B936"/>
+                                <path d="M25 120 C25 100 65 100 65 120" fill="#E8B936"/>
+                                
+                                <circle cx="75" cy="45" r="14" fill="#E8B936"/>
+                                <path d="M55 90 C55 70 95 70 95 90" fill="#E8B936"/>
+
+                                <circle cx="100" cy="30" r="14" fill="#E8B936"/>
+                                <path d="M80 75 C80 55 120 55 120 75" fill="#E8B936"/>
+
+                                <circle cx="125" cy="45" r="14" fill="#E8B936"/>
+                                <path d="M105 90 C105 70 145 70 145 90" fill="#E8B936"/>
+
+                                <circle cx="155" cy="75" r="14" fill="#E8B936"/>
+                                <path d="M135 120 C135 100 175 100 175 120" fill="#E8B936"/>
+                            </svg>
+                            <h1 class="text-2xl font-black text-primary leading-none -mt-1" style="font-family: 'Cairo', sans-serif;">إشراق</h1>
+                        </div>
+
+                        <!-- الفاصل العمودي -->
+                        <div class="h-10 w-px bg-gray-200"></div>
+
+                        <!-- الجزء الأيسر: اسم الجمعية -->
+                        <div class="flex flex-col items-start justify-center">
+                            <span class="text-primary font-bold text-xs md:text-sm leading-tight">جمعية التنمية</span>
+                            <span class="text-primary font-bold text-xs md:text-sm leading-tight">الاجتماعية بحي الإسكان</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-10 w-px bg-white/30 mx-2 hidden md:block"></div>
+                <span class="text-2xl font-bold text-white hidden md:flex items-center gap-2">
+                    <i class="fa-solid fa-plant-wilt text-secondary"></i>
+                    نواة
+                </span>
+            </a>
+
+            <div class="hidden md:flex gap-6 text-white font-medium items-center">
+                <a href="#about" class="hover:text-secondary transition text-sm">عن المشروع</a>
+                <a href="#goals" class="hover:text-secondary transition text-sm">الأهداف</a>
+                <a href="#program" class="hover:text-secondary transition text-sm">رحلة البرنامج</a>
+                <a href="#ai-advisor" class="text-secondary font-bold hover:text-white transition text-sm flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full border border-white/20"><i class="fa-solid fa-wand-magic-sparkles"></i>مستشار نواة</a>
+                <a href="#register" class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-yellow-500 transition shadow-lg text-sm font-bold border-b-2 border-yellow-600">سجل الآن</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darkGreen absolute w-full p-4 border-t border-secondary shadow-xl">
+            <a href="#about" class="block text-white py-2 hover:text-secondary border-b border-white/10">عن المشروع</a>
+            <a href="#goals" class="block text-white py-2 hover:text-secondary border-b border-white/10">الأهداف</a>
+            <a href="#program" class="block text-white py-2 hover:text-secondary border-b border-white/10">رحلة البرنامج</a>
+            <a href="#ai-advisor" class="block text-secondary font-bold py-2 hover:text-white border-b border-white/10">مستشار نواة ✨</a>
+            <a href="#register" class="block text-white py-2 mt-2 bg-secondary text-center rounded-lg shadow font-bold">سجل الآن</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg h-screen flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl text-white pt-20">
+            <span class="inline-block bg-secondary text-white text-xs md:text-sm px-4 py-1.5 rounded-full mb-6 font-bold tracking-wide animate-pulse shadow-lg border border-yellow-400/30">
+                <i class="fa-solid fa-bullhorn ml-2"></i> الدفعة الأولى متاحة الآن
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-md">
+                صناعة القادة الشباب <br> <span class="text-secondary relative inline-block mt-2">
+                    من داخل الحي
+                    <!-- خط زخرفي تحت النص -->
+                    <svg class="absolute w-full h-3 -bottom-2 right-0 text-white opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7201 5.48511 76.5337 -0.583303 197.999 2.00002" stroke="#E8B936" stroke-width="4" stroke-linecap="round"/></svg>
+                </span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-gray-100 max-w-2xl mx-auto font-light leading-relaxed">
+                مشروع تنموي قيادي لاكتشاف وتأهيل نخبة من شباب الحي ليكونوا قادة مبادرين ونواة لمستقبل مشرق.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#register" class="bg-secondary hover:bg-yellow-500 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 border-b-4 border-yellow-600">
+                    انضم إلينا الآن <i class="fa-solid fa-arrow-left mr-2"></i>
+                </a>
+                <a href="#about" class="bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded-full transition duration-300">
+                    تفاصيل المشروع
+                </a>
+            </div>
+        </div>
+        
+        <!-- Animated Scroll Down -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white opacity-70">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- Definition & Problem Section -->
+    <section id="about" class="py-24 container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary rounded-full opacity-20 group-hover:scale-110 transition duration-500"></div>
+                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-primary rounded-full opacity-10 group-hover:scale-110 transition duration-500"></div>
+                <!-- صورة بديلة: يد تمسك ببوصلة (رمزية للقيادة والتوجيه) -->
+                <img src="https://images.unsplash.com/photo-1506606352681-649023fac596?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Leadership" class="rounded-3xl shadow-2xl relative z-10 w-full h-[450px] object-cover transform transition duration-500 group-hover:rotate-1 border-4 border-white">
+                <!-- Badge -->
+                <div class="absolute bottom-10 right-10 z-20 bg-white p-4 rounded-xl shadow-lg border-r-4 border-secondary max-w-xs animate-bounce" style="animation-duration: 3s;">
+                    <p class="font-bold text-primary text-sm"><i class="fa-solid fa-quote-right ml-2 text-secondary"></i>القائد هو من يعرف الطريق، ويمضي فيه، ويرشد الآخرين إليه.</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-secondary font-bold text-lg mb-2 flex items-center gap-2"><span class="w-8 h-1 bg-secondary inline-block rounded"></span> من نحن؟</h2>
+                <h3 class="text-4xl font-bold text-primary mb-6 leading-snug">نواة تشغيلية مستدامة <br> لبرامج الجمعية</h3>
+                <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                    مشروع "نواة" هو استثمار حقيقي في طاقات الحي. نسعى لاكتشاف الشباب في المرحلة الثانوية والجامعية، وتزويدهم بالأدوات القيادية والقيمية ليكونوا فاعلين في مجتمعهم.
+                </p>
+                
+                <div class="bg-red-50 p-8 rounded-2xl shadow-sm border border-red-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-red-400"></div>
+                    <h4 class="font-bold text-red-600 mb-4 text-lg flex items-center"><i class="fa-solid fa-triangle-exclamation ml-2"></i> المشكلة التي نعالجها:</h4>
+                    <ul class="text-gray-700 space-y-3">
+                        <li class="flex items-center"><i class="fa-solid fa-circle-xmark text-red-400 ml-3 text-lg"></i> ندرة القيادات الشابة المؤهلة.</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-xmark text-red-400 ml-3 text-lg"></i> الاعتماد المرهق على الجهود الفردية.</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-xmark text-red-400 ml-3 text-lg"></i> طاقات شبابية مهدرة داخل الحي.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Stats -->
+    <section class="bg-primary py-20 text-white relative overflow-hidden">
+        <!-- Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-white/20">
+                <div class="p-6 transition hover:transform hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                        <i class="fa-solid fa-users text-4xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-2">20 - 30</h3>
+                    <p class="text-white/90 text-lg">شاب من نخبة أبناء الحي</p>
+                </div>
+                <div class="p-6 transition hover:transform hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                        <i class="fa-solid fa-cake-candles text-4xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-2">16 - 23</h3>
+                    <p class="text-white/90 text-lg">سنة (المرحلة العمرية)</p>
+                </div>
+                <div class="p-6 transition hover:transform hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                        <i class="fa-solid fa-clipboard-check text-4xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-2">معايير دقيقة</h3>
+                    <p class="text-white/90 text-lg">الالتزام - الرغبة - القابلية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals & Impact Section -->
+    <section id="goals" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-primary mb-4">لماذا مشروع نواة؟</h2>
+                <div class="w-24 h-1.5 bg-secondary mx-auto rounded-full"></div>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">نحن لا نقدم مجرد دورة تدريبية، بل نصنع مستقبلاً من خلال أهداف استراتيجية واضحة.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Goal 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover text-center border-t-4 border-secondary group">
+                    <div class="w-20 h-20 bg-green-50 rounded-2xl rotate-3 group-hover:rotate-6 transition flex items-center justify-center mx-auto mb-6 text-primary text-3xl">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">اكتشاف المواهب</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">التنقيب عن القيادات الشابة الواعدة داخل الحي وتوجيهها.</p>
+                </div>
+
+                <!-- Goal 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover text-center border-t-4 border-primary group">
+                    <div class="w-20 h-20 bg-green-50 rounded-2xl -rotate-3 group-hover:-rotate-6 transition flex items-center justify-center mx-auto mb-6 text-primary text-3xl">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">تنمية المهارات</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">بناء القدرات القيادية والقيمية وتعزيز روح المسؤولية.</p>
+                </div>
+
+                <!-- Goal 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover text-center border-t-4 border-secondary group">
+                    <div class="w-20 h-20 bg-green-50 rounded-2xl rotate-3 group-hover:rotate-6 transition flex items-center justify-center mx-auto mb-6 text-primary text-3xl">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">استدامة التطوع</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">دعم استدامة العمل التطوعي وتشغيل برامج الجمعية بكفاءة.</p>
+                </div>
+
+                 <!-- Goal 4 -->
+                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover text-center border-t-4 border-primary group">
+                    <div class="w-20 h-20 bg-green-50 rounded-2xl -rotate-3 group-hover:-rotate-6 transition flex items-center justify-center mx-auto mb-6 text-primary text-3xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-primary">صف ثاني قيادي</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">خلق جيل جديد يحمل الراية ويقود المبادرات مستقبلاً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Execution Mechanism (Timeline) -->
+    <section id="program" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <div class="lg:w-1/3">
+                    <h2 class="text-4xl font-bold text-primary mb-6">آلية التنفيذ</h2>
+                    <p class="text-gray-600 mb-8 text-lg">رحلة متكاملة تمتد لأسابيع لصناعة الأثر الحقيقي، تبدأ بالاختيار وتنتهي بالتمكين.</p>
+                    <div class="bg-green-50 p-8 rounded-3xl border border-green-100">
+                        <h4 class="font-bold text-primary mb-4 text-xl">مكونات المشروع:</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-center bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-check-circle text-secondary ml-3 text-xl"></i> برنامج تدريبي (قيم، قيادة)</li>
+                            <li class="flex items-center bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-check-circle text-secondary ml-3 text-xl"></i> ممارسة عملية ميدانية</li>
+                            <li class="flex items-center bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-check-circle text-secondary ml-3 text-xl"></i> توجيه وإرشاد (Mentorship)</li>
+                            <li class="flex items-center bg-white p-3 rounded-xl shadow-sm"><i class="fa-solid fa-check-circle text-secondary ml-3 text-xl"></i> مشروع تخرج يخدم الحي</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lg:w-2/3 relative pl-4">
+                    <!-- Timeline Line -->
+                    <div class="absolute right-[27px] top-4 bottom-4 w-1 bg-gray-100 rounded"></div>
+
+                    <!-- Step 1 -->
+                    <div class="relative flex items-start mb-10 group">
+                        <div class="absolute right-0 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center border-[6px] border-white shadow-lg z-10 text-xl font-bold group-hover:bg-secondary transition">1</div>
+                        <div class="mr-20 bg-gray-50 p-6 rounded-2xl w-full shadow-sm border border-gray-100 group-hover:shadow-md group-hover:border-secondary/30 transition duration-300">
+                            <h4 class="font-bold text-primary text-xl mb-2">الترشيح والاختيار</h4>
+                            <p class="text-gray-500">فتح باب التسجيل وإجراء المقابلات الشخصية لاختيار النخبة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex items-start mb-10 group">
+                        <div class="absolute right-0 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center border-[6px] border-white shadow-lg z-10 text-xl font-bold group-hover:bg-secondary transition">2</div>
+                        <div class="mr-20 bg-gray-50 p-6 rounded-2xl w-full shadow-sm border border-gray-100 group-hover:shadow-md group-hover:border-secondary/30 transition duration-300">
+                            <h4 class="font-bold text-primary text-xl mb-2">البرنامج التدريبي</h4>
+                            <p class="text-gray-500">تنفيذ البرنامج المكثف لمدة 6 - 8 أسابيع لتنمية المهارات.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex items-start mb-10 group">
+                        <div class="absolute right-0 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center border-[6px] border-white shadow-lg z-10 text-xl font-bold group-hover:bg-secondary transition">3</div>
+                        <div class="mr-20 bg-gray-50 p-6 rounded-2xl w-full shadow-sm border border-gray-100 group-hover:shadow-md group-hover:border-secondary/30 transition duration-300">
+                            <h4 class="font-bold text-primary text-xl mb-2">التطبيق العملي</h4>
+                            <p class="text-gray-500">تكليفات عملية داخل الجمعية تحت إشراف مباشر.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative flex items-start group">
+                        <div class="absolute right-0 w-14 h-14 bg-secondary text-white rounded-full flex items-center justify-center border-[6px] border-white shadow-lg z-10 text-xl font-bold">4</div>
+                        <div class="mr-20 bg-yellow-50 p-6 rounded-2xl w-full shadow-sm border border-yellow-100 group-hover:shadow-md transition duration-300">
+                            <h4 class="font-bold text-secondary text-xl mb-2">التخرج والاستدامة</h4>
+                            <p class="text-gray-600">الحفل الختامي، مشاريع التخرج، والارتباط بمسار تطوعي دائم.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW AI SECTION: Nawat Advisor -->
+    <section id="ai-advisor" class="py-24 relative overflow-hidden bg-gradient-to-br from-darkGreen to-primary text-white">
+        <div class="absolute top-0 right-0 w-full h-full opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+        <div class="absolute -left-20 bottom-0 w-96 h-96 bg-secondary opacity-20 blur-3xl rounded-full"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="bg-white/10 backdrop-blur border border-white/20 text-secondary font-bold px-4 py-1.5 rounded-full text-sm mb-4 inline-flex items-center gap-2">
+                    <i class="fa-solid fa-microchip"></i> مدعوم بالذكاء الاصطناعي 
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">مستشار "نواة" للمبادرات</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto text-lg">
+                    جزء من رحلة "نواة" هو مشروع التخرج الذي يخدم الحي. 
+                    أدخل اهتماماتك وسيقوم المستشار الذكي باقتراح فكرة مبادرة مجتمعية مبتكرة يمكنك قيادتها.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+                
+                <div class="flex flex-col gap-5">
+                    <label class="font-bold text-xl text-secondary flex items-center gap-2">
+                        <i class="fa-regular fa-comment-dots"></i> ما هي اهتماماتك؟
+                    </label>
+                    <div class="relative">
+                        <textarea id="aiInput" rows="2" class="w-full px-6 py-4 rounded-2xl bg-darkGreen/50 text-white placeholder-gray-400 border border-gray-600 focus:border-secondary focus:ring-2 focus:ring-secondary/50 outline-none transition resize-none" placeholder="مثلاً: أحب كرة القدم، البرمجة، والاهتمام بالبيئة..."></textarea>
+                        <i class="fa-solid fa-pen absolute left-4 top-4 text-gray-400"></i>
+                    </div>
+                    
+                    <button onclick="generateProjectIdea()" class="bg-secondary hover:bg-yellow-500 text-white font-bold py-4 px-6 rounded-xl transition transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 group shadow-lg shadow-yellow-900/20">
+                        <span>اقترح لي مبادرة</span>
+                        <i class="fa-solid fa-wand-magic-sparkles group-hover:rotate-12 transition"></i>
+                    </button>
+                </div>
+
+                <!-- Result Area -->
+                <div id="aiResultContainer" class="mt-8 hidden border-t border-white/10 pt-8">
+                    <div id="aiLoading" class="hidden text-center py-6">
+                        <div class="typing-indicator mb-3">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <p class="text-sm text-gray-400">جاري تحليل الاهتمامات وتوليد الفكرة...</p>
+                    </div>
+                    
+                    <div id="aiOutput" class="bg-gradient-to-br from-white to-gray-50 text-gray-800 rounded-2xl p-6 shadow-xl hidden animate-fade-in border-l-4 border-secondary">
+                        <h4 class="font-bold text-primary text-xl mb-3 flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center"><i class="fa-regular fa-lightbulb text-secondary"></i></div>
+                            الفكرة المقترحة:
+                        </h4>
+                        <p id="responseText" class="text-gray-700 leading-relaxed text-lg"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="py-24 bg-primary relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-600 opacity-20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 text-white">
+                    <h2 class="text-5xl font-bold mb-8 leading-tight">هل ترى في نفسك <br><span class="text-secondary">القائد القادم؟</span></h2>
+                    <p class="text-green-50 text-lg mb-10 leading-relaxed">
+                        إذا كنت بين 16 و 23 عاماً، ولديك الشغف لخدمة حيك ومجتمعك، وتطوير مهاراتك الشخصية، فمكانك معنا في "نواة".
+                    </p>
+                    <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10">
+                        <ul class="space-y-4">
+                            <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center ml-4"><i class="fa-solid fa-certificate text-secondary"></i></div> <span class="text-lg">شهادات معتمدة للمجتازين</span></li>
+                            <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center ml-4"><i class="fa-solid fa-network-wired text-secondary"></i></div> <span class="text-lg">شبكة علاقات قوية</span></li>
+                            <li class="flex items-center"><div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center ml-4"><i class="fa-solid fa-star text-secondary"></i></div> <span class="text-lg">فرصة لقيادة مبادرات حقيقية</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <form id="joinForm" onsubmit="submitForm(event)" class="bg-white rounded-3xl p-8 lg:p-10 shadow-2xl relative">
+                        <div class="absolute -top-4 -left-4 w-20 h-20 bg-secondary rounded-full flex items-center justify-center text-white font-bold transform -rotate-12 shadow-lg z-20">
+                            سارع<br>بالتسجيل
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">استمارة الانضمام</h3>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">الاسم الثلاثي</label>
+                                <div class="relative">
+                                    <span class="absolute right-4 top-3.5 text-gray-400"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" required class="w-full pr-10 pl-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-secondary focus:ring-4 focus:ring-yellow-100 outline-none transition" placeholder="اكتب اسمك هنا">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">العمر</label>
+                                    <input type="number" min="16" max="23" required class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-secondary focus:ring-4 focus:ring-yellow-100 outline-none transition" placeholder="16-23">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">رقم الجوال</label>
+                                    <div class="relative">
+                                        <span class="absolute right-4 top-3.5 text-gray-400"><i class="fa-solid fa-mobile-screen"></i></span>
+                                        <input type="tel" required class="w-full pr-10 pl-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-secondary focus:ring-4 focus:ring-yellow-100 outline-none transition text-left dir-ltr" placeholder="05xxxxxxxx">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">لماذا ترغب بالانضمام؟</label>
+                                <textarea required rows="3" class="w-full px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 focus:border-secondary focus:ring-4 focus:ring-yellow-100 outline-none transition" placeholder="حدثنا عن دوافعك باختصار..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-secondary hover:bg-yellow-500 text-white font-bold py-4 rounded-xl shadow-lg transition duration-300 transform hover:-translate-y-1 text-lg">
+                                إرسال طلب الانضمام
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 text-center md:text-right">
+                    <div class="flex items-center justify-center md:justify-start gap-4 mb-2">
+                        <!-- Footer Logo: تصميم الشعار العرضي برمجياً في الفوتر -->
+                        <div class="flex items-center gap-2 opacity-90 bg-white p-2 rounded-lg h-16 w-auto overflow-hidden">
+                             <!-- SVG Icon Mini -->
+                             <svg width="35" height="25" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M70 130 C70 100 130 100 130 130 Z" fill="#239F56"/>
+                                <circle cx="45" cy="75" r="14" fill="#E8B936"/>
+                                <path d="M25 120 C25 100 65 100 65 120" fill="#E8B936"/>
+                                <circle cx="75" cy="45" r="14" fill="#E8B936"/>
+                                <path d="M55 90 C55 70 95 70 95 90" fill="#E8B936"/>
+                                <circle cx="100" cy="30" r="14" fill="#E8B936"/>
+                                <path d="M80 75 C80 55 120 55 120 75" fill="#E8B936"/>
+                                <circle cx="125" cy="45" r="14" fill="#E8B936"/>
+                                <path d="M105 90 C105 70 145 70 145 90" fill="#E8B936"/>
+                                <circle cx="155" cy="75" r="14" fill="#E8B936"/>
+                                <path d="M135 120 C135 100 175 100 175 120" fill="#E8B936"/>
+                            </svg>
+                            <div class="flex flex-col items-center">
+                                <span class="text-xl font-black text-primary leading-none">إشراق</span>
+                                <span class="text-[0.6rem] font-bold text-primary leading-none mt-0.5">جمعية التنمية الاجتماعية</span>
+                            </div>
+                        </div>
+                        <div class="h-6 w-px bg-gray-700"></div>
+                        <h3 class="text-xl font-bold text-white">مشروع نواة</h3>
+                    </div>
+                    <p class="text-sm opacity-70">أحد مشاريع جمعية إشراق | صناعة القادة الشباب</p>
+                </div>
+                <div class="flex gap-6 text-2xl">
+                    <a href="#" class="hover:text-secondary hover:scale-110 transition"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-secondary hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-secondary hover:scale-110 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2024 جميع الحقوق محفوظة لمشروع نواة.</p>
+                <p class="mt-2 md:mt-0 text-gray-600">تصميم وتطوير: منصة ذكية</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal Notification -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden transition-opacity opacity-0 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-10 max-w-sm mx-4 text-center transform scale-90 transition-transform duration-300 shadow-2xl" id="modalContent">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                <i class="fa-solid fa-check text-green-600 text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">تم استلام طلبك!</h3>
+            <p class="text-gray-600 mb-8 leading-relaxed">شكراً لاهتمامك بالانضمام لمشروع نواة. سنتواصل معك قريباً لإجراء المقابلة.</p>
+            <button onclick="closeModal()" class="bg-primary text-white px-8 py-3 rounded-xl hover:bg-green-800 transition w-full font-bold shadow-lg">حسناً</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Gemini API Logic ---
+        async function generateProjectIdea() {
+            const input = document.getElementById('aiInput').value.trim();
+            const resultContainer = document.getElementById('aiResultContainer');
+            const loading = document.getElementById('aiLoading');
+            const output = document.getElementById('aiOutput');
+            const responseText = document.getElementById('responseText');
+            
+            if (!input) {
+                alert('الرجاء إدخال اهتماماتك أولاً');
+                return;
+            }
+
+            // UI State: Loading
+            resultContainer.classList.remove('hidden');
+            loading.classList.remove('hidden');
+            output.classList.add('hidden');
+
+            const apiKey = ""; // Set by environment
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const prompt = `
+                أنت مستشار خبير في مشروع "نواة" لتطوير القيادات الشابة. 
+                المستخدم شاب مهتم بالمجالات التالية: "${input}". 
+                اقترح فكرة مشروع تطوعي أو مبادرة مجتمعية مبتكرة واحدة فقط يمكن تنفيذها داخل الحي السكني وتناسب هذه الاهتمامات. 
+                اجعل الفكرة عملية، جذابة، تعزز روح القيادة، ومختصرة (في حدود 3-4 جمل). 
+                تحدث بنبرة مشجعة ومحفزة.
+            `;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: prompt }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const generatedText = data.candidates[0].content.parts[0].text;
+                    // Format bold text if any (simple markdown to bold)
+                    responseText.innerHTML = generatedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    loading.classList.add('hidden');
+                    output.classList.remove('hidden');
+                } else {
+                    throw new Error('No content returned');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                loading.classList.add('hidden');
+                output.classList.remove('hidden');
+                responseText.innerText = "عذراً، حدث خطأ في الاتصال بالمستشار الذكي. حاول مرة أخرى.";
+            }
+        }
+
+        // --- Existing Site Logic ---
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-primary', 'shadow-xl', 'py-2');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('bg-primary', 'shadow-xl', 'py-2');
+                navbar.classList.add('py-2');
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-90');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            document.getElementById('joinForm').reset();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-90');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
